@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>net452;net461;net47;net472</TargetFrameworks>
     <AssemblyName>Swashbuckle.Core</AssemblyName>
-    <Version>5.6.3</Version>
+    <Version>5.6.6</Version>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>5.6.3.0</AssemblyVersion>
-    <FileVersion>5.6.3.0</FileVersion>
-    <PackageReleaseNotes>Migration to new VS project format, multi-target core,  update from ASP.NET Core 4.X to 5.3.X</PackageReleaseNotes>
+    <AssemblyVersion>5.6.6.0</AssemblyVersion>
+    <FileVersion>5.6.6.0</FileVersion>
+    <PackageReleaseNotes>Migration to new VS project format, multi-target core,  update from ASP.NET Core 4.X to 5.3.X, set embedded resource.</PackageReleaseNotes>
     <PackageTags>swagger swagger-ui</PackageTags>
     <Authors>Richard Morris</Authors>
     <Copyright>Copyright 2013-2019</Copyright>
@@ -33,5 +33,24 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SwaggerUi\CustomAssets\discoveryUrlSelector.js" />
+    <EmbeddedResource Include="SwaggerUi\CustomAssets\typography.css" />
+    <EmbeddedResource Include="SwaggerUi\CustomAssets\index.html" />
+    <EmbeddedResource Include="SwaggerUi\CustomAssets\screen.css" />
+    <Content Include="Swashbuckle.Core.nuspec">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Swashbuckle.Core.snk" />
+  </ItemGroup>
+  <!-- Automatically embed swagger-ui files. Construct name so resource can be retrieved by swagger-ui relative path -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\swagger-ui\dist\**\*.*">
+      <LogicalName>%(RecursiveDir)%(FileName)%(Extension)</LogicalName>
+      <InProject>false</InProject>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
